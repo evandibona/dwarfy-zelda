@@ -14,17 +14,31 @@ local function getTile(t_x, t_y)
 function maps.drawMap(tatl, oatl, map, x_off, y_off)
   for j=1,#map do
     for i=1,#(map[j]) do
-      local a, b = nxy(map[j][i][1])
-      love.graphics.draw( overAtlas, 
-        getTile(nxy(map[j][i][1])), 
+      if  (i>=x_off and i<x_off+30) 
+        and (j>=y_off and j<y_off+17) then
+        local a, b = map[j][i][1], map[j][i][2]
+        love.graphics.draw( tatl, getTile(nxy(a)), 
+          (i-x_off)*maps.t_s, (j-y_off)*maps.t_s )
+        if b  then
+          love.graphics.draw( oatl, getTile(nxy(b)), 
+            (i-x_off)*maps.t_s, (j-y_off)*maps.t_s )
+        end
+      end
+    end
+  end
+  --[[
+  for j=1,#map do
+    for i=1,#(map[j]) do
+      local a, b = map[j][i][1], map[j][i][2]
+      love.graphics.draw( tatl, getTile(nxy(a)), 
         (i-x_off)*maps.t_s, (j-y_off)*maps.t_s )
-      if map[j][i][2] then
-        love.graphics.draw( overAtlas, 
-          getTile(nxy(map[j][i][2])), 
+      if b  then
+        love.graphics.draw( oatl, getTile(nxy(b)), 
           (i-x_off)*maps.t_s, (j-y_off)*maps.t_s )
       end
     end
   end
+  --]]
 end
 
 function maps.drawSprite(sheet, xo, yo)
