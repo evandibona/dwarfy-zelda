@@ -4,19 +4,16 @@
 -- Convert img-data into Lua array. 
 
 local bitmap = require("./lib/bitmap.lua")
-local bmp = bitmap.from_file("./gfx/gen-test.bmp")
+local island = bitmap.from_file("./gfx/gen/gen-test.bmp")
+local maps = {
+  bitmap.from_file("./gfx/gen/island-base.bmp"),
+  bitmap.from_file("./gfx/gen/island-landscape.bmp")
+}
 
 local hdr = "local gen = {}\ngen.island = {\n"
 local ftr = "\n}\n\nreturn gen\n"
 
 local t = {}
-  t.water = 397 -- rand tile f(x)
-  t.sand  = 275
-  t.thick = 299
-  t.thin  = 276
-  t.sandw = { 300, 301, 302, 326, 350, 349, 348, 324 }
-  t.swater= { 303, 304, 305, 329, 353, 352, 351, 327 }
-  t.sawa  = { 372, 373, 374, 398, 422, 421, 420, 396 }
 
 
 print("\n\n")

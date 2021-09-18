@@ -2,9 +2,31 @@
 
 ### Version 0.01
 
-### Version 0.5
+Map in place. Generated from bitmap, allows quick level creation. 
+
+### Version 0.1
+
+All of the characters can run around like little critters. 
+Do a handful of tasks each day in accordance with their traits, 
+and take care of themselves, keeping their levels in check. 
+
+### Version 0.1 to 0.5
 
 All the building blocks for the final game are in place. 
+
+  * Stories: objects that are passed around
+  * Memories, some emotional response to connections to objects, names, people.
+  * Fire
+  * Guns, basic combat
+  * Kidnapping
+  * Risk Assessment. Present/Future Pain, Present/Future Pleasure
+
+### Version 0.751 to 1
+
+Interiors
+  * Cannot be used until out-of-sight state is handled.
+Value Assessment
+  * each character will value objects, in a unique way. 
 
 ### Version 1
 
