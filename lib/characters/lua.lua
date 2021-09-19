@@ -1,21 +1,26 @@
 function charTemplate()
   local char = {}
-  char.x, char.y = 194*16, 182*16
+  char.x, char.y = 294*16, 150*16
   char.tasks = {}
-  char.speed = 0.25
+  char.speed = 0.5
   return char
 end
 
-local a, b = charTemplate(), charTemplate()
+local a, b, c = charTemplate(), charTemplate(), charTemplate()
 
 a.name = "Perry McCormick"
-  table.insert(a.tasks, { 'moveLeft', 50 })
-  table.insert(a.tasks, { 'moveUp', 20*16 })
-  table.insert(a.tasks, { 'work', 0 })
+  table.insert(a.tasks, { 'moveto', 270, 140 })
+  a.speed = 0.6
 b.name = "Rayne Blanchard"
-  b.x = b.x + 5*16
+  table.insert(b.tasks, { 'moveto', 270, 140 })
+  b.y = b.y - 2*16
+  b.speed = 0.7
+c.name = "Bee Bob"
+  table.insert(c.tasks, { 'moveto', 270, 140 })
+  c.y = c.y - 10*16
+  c.speed = 0.62
 
-local chars = {a, b}
+local chars = {a, b, c}
 --table.insert(chars, { a, b, c, d, e, f, g})
 return chars
 

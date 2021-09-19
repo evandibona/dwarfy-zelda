@@ -5,7 +5,7 @@ local draw = require("./lib/draw.lua")
 local gen  = require("./lib/gen.lua")
 local chars= require("./lib/characters.lua")
 local tsk  = require("./lib/tasking.lua")
-local x_off,  y_off = 184, 172
+local x_off,  y_off = 270, 130
 local ww, wh = 30, 17
 local time_of_day = 0
 
@@ -46,7 +46,7 @@ function love.update( dt )
     print("TICK: "..math.floor(time_of_day))
   end
 
-  tsk.run_all( chars )
+  tsk.run_all( chars, map )
 
 end
 
