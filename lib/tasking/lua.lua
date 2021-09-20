@@ -5,47 +5,40 @@ local trk = require("./lib/track.lua")
 
 function tsk.surroundings(map, x, y)
   local function s(n)
-    if n ==     trk.tls.water then return 1
-    elseif n == trk.tls.thick then return 0.25
-    else return 0 end
+    if n ==     trk.tls.water then return 0.1
+    elseif n == trk.tls.thick then return 0.5
+    else return 1 end
   end
 
-  local d = { 
-    s(map[y-1][x-1][1]), s(map[y-1][x][1]),   s(map[y-1][x+1][1]),
-    s(map[y][x+1][1]),   s(map[y+1][x+1][1]), s(map[y+1][x][1]), 
-    s(map[y+1][x-1][1]), s(map[y][x-1][1]),   s(map[y][x][1]), 
+  return { 
+    { s(map[y-1][x-1][1]), s(map[y-1][x][1]),   s(map[y-1][x+1][1]) },
+    {   s(map[y][x-1][1]),   s(map[y][x][1]),     s(map[y][x+1][1]) }, 
+    { s(map[y+1][x-1][1]), s(map[y+1][x][1]),   s(map[y+1][x+1][1]) } 
   }
-  return d
 end
 
 local function direction(x, y, tx, ty)
   local a, b = tx-x, ty-y
   if a ~= 0 then a = a/math.abs(a) end
   if b ~= 0 then b = b/math.abs(b) end
-  local ds = { {1,2,3},{8,9,4},{7,6,5} }
-  return ds[2+b][2+a]
+  return a, b
 end
 
 local function moveto(c, m, tx, ty)
-
-  --local hindrance = 0
-  --local spd = c.speed * hindrance
-
-  -- If movement is possible, it's not ideal, but the target has not been reached
-  --  Pick a random direction of available options
-
-  -- determine the direction from cur_pos to target. 
-
-  -- Pick the closest next step from there. 
   
-  local s = 
-    { {-1,-1}, {0,-1}, {1,-1}, {1,0}, {1,1}, {0,1}, {-1,1}, {-1,0} }
-  local d = direction(c.X(), c.Y(), tx, ty)
+  local da, db = direction(c.X(), c.Y(), tx, ty)
+  local s = tsk.surroundings(m, c.X(), c.Y())
+  
+  local h = s[2][2]
+  c.x = c.x + da*h*c.speed   c.y = c.y + db*h*c.speed
 
-  c.x = c.x + s[d][1] c.y = c.y + s[d][2]
+  --print("-----------------")
+  --print(s[1][1],s[1][2],s[1][3])
+  --print(s[2][1],s[2][2],s[2][3])
+  --print(s[3][1],s[3][2],s[3][3])
 
-  if (c.X()==tx) and (c.Y()==ty) then return true 
-  --elseif hindrance >= 1 then return true
+  if s[2+db][2+da] == 0 then return true 
+  elseif (c.X()==tx) and (c.Y()==ty) then return true 
   elseif c.speed <= 0 then return true
   end
 end

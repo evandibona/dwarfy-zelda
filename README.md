@@ -10,16 +10,24 @@ All of the characters can run around like little critters.
 Do a handful of tasks each day in accordance with their traits, 
 and take care of themselves, keeping their levels in check. 
 
+Debugging tools: 
+  * visualized task assignment. 
+  * log of completed tasks and events. 
+
+
 ### Version 0.1 to 0.5
 
 All the building blocks for the final game are in place. 
-
   * Stories: objects that are passed around
   * Memories, some emotional response to connections to objects, names, people.
   * Fire
   * Guns, basic combat
   * Kidnapping
   * Risk Assessment. Present/Future Pain, Present/Future Pleasure
+  * Inventory, Items
+  * Eating
+  * Fishing
+  * Sleeping
 
 ### Version 0.751 to 1
 

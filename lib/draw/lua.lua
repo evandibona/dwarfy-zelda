@@ -11,6 +11,25 @@ local function getTile(t_x, t_y)
   return love.graphics.newQuad( 
     t_x*draw.t_s, t_y*draw.t_s, draw.t_s, draw.t_s, draw.w, draw.h ) end
 
+local function draw_task_visuals(sheet, x_off, y_off, tasks)
+  local function q( x, y )
+    return love.graphics.newQuad( x*16, y*16, 16, 16, 256, 144 )
+  end
+  local yellowDot, cyanDot = q(10, 8), q(12, 8)
+  if tasks[#tasks] then
+    for i=#tasks,1,-1 do
+      local t = tasks[i]
+      if t[1] == "moveto" then
+        love.graphics.draw( sheet, yellowDot, 
+          t[2]*16-x_off*draw.t_s, t[3]*16-y_off*draw.t_s )
+      elseif t[1] == "journey" then
+        love.graphics.draw( sheet, cyanDot, 
+          t[2]*16-x_off*draw.t_s, t[3]*16-y_off*draw.t_s )
+      end
+    end
+  end
+end
+
 function draw.map(tatl, oatl, map, x_off, y_off, ww, wh)
   for j=1,#map do
     for i=1,#(map[j]) do
@@ -31,17 +50,12 @@ end
 function draw.chars(sheet, chars, x_off, y_off, ww, wh)
   for i=1,#chars do
     local char = chars[i]
-    local charq = love.graphics.newQuad( 0, 0, 16, 32, 64, 128 )
+    local charq = love.graphics.newQuad( 0, 0, 16, 32, 256, 144 )
     if true then -- If in view-port
       love.graphics.draw( sheet, charq, 
-        char.x-(x_off*draw.t_s), char.y-(y_off*draw.t_s) )
+        char.x-(x_off*draw.t_s), (char.y-1)-(y_off*draw.t_s) )
 
-      local ct = char.tasks[#char.tasks] 
-      if ct then
-        local charqq = love.graphics.newQuad( 32, 32, 16, 32, 64, 128 )
-        love.graphics.draw( sheet, charqq, 
-          ct[2]*16-(x_off*draw.t_s), ct[3]*16-(y_off*draw.t_s) )
-      end
+      draw_task_visuals(sheet, x_off, y_off, char.tasks)
     end
   end
 end
