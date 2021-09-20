@@ -35,6 +35,13 @@ function draw.chars(sheet, chars, x_off, y_off, ww, wh)
     if true then -- If in view-port
       love.graphics.draw( sheet, charq, 
         char.x-(x_off*draw.t_s), char.y-(y_off*draw.t_s) )
+
+      local ct = char.tasks[#char.tasks] 
+      if ct then
+        local charqq = love.graphics.newQuad( 32, 32, 16, 32, 64, 128 )
+        love.graphics.draw( sheet, charqq, 
+          ct[2]*16-(x_off*draw.t_s), ct[3]*16-(y_off*draw.t_s) )
+      end
     end
   end
 end

@@ -3,31 +3,49 @@ local trk = require("./lib/track.lua")
 
 -- move up, left, right, down, sets the target as those spaces ahead. 
 
-local function beneath(map, x, y)
-  return map[math.floor(y/16)][math.floor(x/16)][1]
+function tsk.surroundings(map, x, y)
+  local function s(n)
+    if n ==     trk.tls.water then return 1
+    elseif n == trk.tls.thick then return 0.25
+    else return 0 end
+  end
+
+  local d = { 
+    s(map[y-1][x-1][1]), s(map[y-1][x][1]),   s(map[y-1][x+1][1]),
+    s(map[y][x+1][1]),   s(map[y+1][x+1][1]), s(map[y+1][x][1]), 
+    s(map[y+1][x-1][1]), s(map[y][x-1][1]),   s(map[y][x][1]), 
+  }
+  return d
+end
+
+local function direction(x, y, tx, ty)
+  local a, b = tx-x, ty-y
+  if a ~= 0 then a = a/math.abs(a) end
+  if b ~= 0 then b = b/math.abs(b) end
+  local ds = { {1,2,3},{8,9,4},{7,6,5} }
+  return ds[2+b][2+a]
 end
 
 local function moveto(c, m, tx, ty)
-  local x, y = math.ceil(c.x/16),  math.ceil(c.y/16)
-  local hindrance = 0
-  local til = beneath(m, c.x, c.y)
-  if til == trk.tls.water then
-    hindrance = c.speed
-  elseif til == trk.tls.thick then
-    hindrance = (c.speed/3)
-  end
-  local spd = c.speed - hindrance
-  
-  if love.math.random(1,2) == 1 then
-    if     x < tx then c.x = c.x + spd
-    elseif x > tx then c.x = c.x - spd end
-  else
-    if     y < ty then c.y = c.y + spd
-    elseif y > ty then c.y = c.y - spd end
-  end
 
-  if (x==tx) and (y==ty) then return true 
-  elseif hindrance >= c.speed then return true
+  --local hindrance = 0
+  --local spd = c.speed * hindrance
+
+  -- If movement is possible, it's not ideal, but the target has not been reached
+  --  Pick a random direction of available options
+
+  -- determine the direction from cur_pos to target. 
+
+  -- Pick the closest next step from there. 
+  
+  local s = 
+    { {-1,-1}, {0,-1}, {1,-1}, {1,0}, {1,1}, {0,1}, {-1,1}, {-1,0} }
+  local d = direction(c.X(), c.Y(), tx, ty)
+
+  c.x = c.x + s[d][1] c.y = c.y + s[d][2]
+
+  if (c.X()==tx) and (c.Y()==ty) then return true 
+  --elseif hindrance >= 1 then return true
   elseif c.speed <= 0 then return true
   end
 end
@@ -43,7 +61,7 @@ local function run_task(char, task, map)
     local fx = fxs[task[1]]
     if fx then
       if fx(char, task, map) then
-        print(task[1], " is done.")
+        --print(task[1], " is done.")
         table.remove(char.tasks)
       end
     end

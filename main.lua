@@ -1,11 +1,12 @@
 #!/usr/bin/lua5.3
 ---------0 --------0 --------0 --------0 --------0 --------0 --------0 --------0
 
+local chars= require("./lib/characters.lua")
 local draw = require("./lib/draw.lua")
 local gen  = require("./lib/gen.lua")
-local chars= require("./lib/characters.lua")
+local bhv  = require("./lib/behaviour.lua")
 local tsk  = require("./lib/tasking.lua")
-local x_off,  y_off = 270, 130
+local x_off,  y_off = 250, 144
 local ww, wh = 30, 17
 local time_of_day = 0
 
@@ -22,6 +23,30 @@ function love.load()
     objatlas:setFilter("nearest", "nearest")
   guysheet = love.graphics.newImage("gfx/guy.png")
     guysheet:setFilter("nearest", "nearest")
+end
+
+function love.keyreleased( key )
+  if key == "up" then
+    if #chars[1].tasks > 0 then
+      chars[1].tasks[#chars[1].tasks][3] = chars[1].tasks[#chars[1].tasks][3] - 2
+    else table.insert( chars[1].tasks, {'moveto', chars[1].X(), chars[1].Y()-1 })
+    end
+  elseif key == "down" then
+    if #chars[1].tasks > 0 then
+      chars[1].tasks[#chars[1].tasks][3] = chars[1].tasks[#chars[1].tasks][3] + 2
+    else table.insert( chars[1].tasks, {'moveto', chars[1].X(), chars[1].Y()+1 })
+    end
+  elseif key == "left" then
+    if #chars[1].tasks > 0 then
+      chars[1].tasks[#chars[1].tasks][2] = chars[1].tasks[#chars[1].tasks][2] - 2
+    else table.insert( chars[1].tasks, {'moveto', chars[1].X()-1, chars[1].Y() })
+    end
+  elseif key == "right" then
+    if #chars[1].tasks > 0 then
+      chars[1].tasks[#chars[1].tasks][2] = chars[1].tasks[#chars[1].tasks][2] + 2
+    else table.insert( chars[1].tasks, {'moveto', chars[1].X()+1, chars[1].Y() })
+    end
+  end
 end
 
 function love.update( dt )
@@ -41,9 +66,9 @@ function love.update( dt )
 
   -- TIME
   if      time_of_day >= 1200 then time_of_day = 0
-  elseif (time_of_day % 2 ) <= .015 then 
-    --TICK
-    print("TICK: "..math.floor(time_of_day))
+  elseif (time_of_day % 2 ) <= dt then 
+    -- bhv.assess_all(chars, map)
+    -- tsk.surroundings( map, chars[1].X(), chars[1].Y() )
   end
 
   tsk.run_all( chars, map )
