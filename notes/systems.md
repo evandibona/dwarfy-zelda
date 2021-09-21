@@ -120,3 +120,18 @@ Only flamable creatures and things can catch fire.
 No interiors. Simply a vessel that allows 
 characters and items to be stacked inside. 
 All have a maximum occupancy
+
+## Pathfinding
+
+So the sketchy and blind algorithm I've settled on is fine for now. 
+It can't see around large chasms, but it stumbles its way along well enough. 
+What would be better right now, is to have a memory system for 
+useful spots and fast routes. 
+
+Here are my thoughts so far
+
+  * as people walk over tiles they become worn, until you get a dirt road. 
+    Would require a duplicate map buffer for the data. 
+  * People can construct a road, somehow using it is stored as memories
+  * Implement a proper pathfinding algorithm. Limited radius?
+

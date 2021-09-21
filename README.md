@@ -17,6 +17,17 @@ Debugging tools:
 
 ### Version 0.1 to 0.5
 
+Improved map generation:
+  * Redo tile atlas, to be sorted by land speed. 
+    * first line is all coastal tiles
+    * second line is all forest tiles, etc. 
+  * Use a lighter color to indicate transition points
+    So the software can use those as pivot points when
+    going back through the file with "surrounds"
+
+Move many of the geometry, map, math functions to a dedicated library file. 
+  Surrounds, distance, direction, etc. 
+
 All the building blocks for the final game are in place. 
   * Stories: objects that are passed around
   * Memories, some emotional response to connections to objects, names, people.
@@ -28,6 +39,17 @@ All the building blocks for the final game are in place.
   * Eating
   * Fishing
   * Sleeping
+  * Memory-based pathfinding
+  * Landmark memory
+  * Dirt roads
+
+Simple stories to tell:
+  * A guy is hungry, goes to catch a fish, cooks and eats it. 
+  * A hike from one end of the island to the next. 
+    * taking naps as needed
+    * eating packed food 
+  * A man is looking for his knife, tells others. 
+    Someone sees it the next day and tells him where it is. 
 
 ### Version 0.751 to 1
 
@@ -52,3 +74,9 @@ But, you can follow that plan, as much or as little as you want to.
     * Maslow's Hierarchy
     * Natural Laws of Justice
     * Tasks, Goals, Objectives
+
+### Version 2
+
+Add memory and time constraints to tasks assigned. 
+So that a forgetful character might forget some smaller tasks, 
+by the time he gets to them. 
