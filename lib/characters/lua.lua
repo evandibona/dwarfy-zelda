@@ -18,7 +18,8 @@ c.boredom = 30
 
 a.name = "Perry McCormick"
   a.speed = 0.6
-  table.insert(a.tasks, { "journey", 250, 150, {} })
+  table.insert(a.tasks, 
+    { "journey", love.math.random(230, 460), love.math.random(30,140), {} })
 b.name = "Rayne Blanchard"
   b.y = b.y - 3*16
   b.speed = 0.7

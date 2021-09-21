@@ -9,12 +9,12 @@ local tsk  = require("./lib/tasking.lua")
 local x_off,  y_off = 250, 144
 --x_off,  y_off = 0, 0
 local ww, wh = 30, 17
-local time_of_day = 0
-
 local map = gen.load_bitmap_layers({
   "./gfx/gen/island-base.bmp", 
   "./gfx/gen/island-landscape.bmp"
 })
+
+map.time_of_day = 0
 
 function love.load()
   love.window.setMode( 960, 540)--, {fullscreen = true} )
@@ -51,7 +51,7 @@ function love.keyreleased( key )
 end
 
 function love.update( dt )
-  time_of_day = time_of_day + dt
+  map.time_of_day = map.time_of_day + dt
   local speed = 18 
   if love.keyboard.isDown("a") then
     x_off = x_off - (speed * dt)
@@ -63,11 +63,14 @@ function love.update( dt )
   elseif love.keyboard.isDown("s") then
     y_off = y_off + (speed * dt)
   end
-  if love.keyboard.isDown("escape") then love.event.quit() end
+  if love.keyboard.isDown("escape") then 
+    love.event.quit() 
+    tsk.print_log()
+  end
 
   -- TIME
-  if      time_of_day >= 1200 then time_of_day = 0
-  elseif (time_of_day % 2 ) <= dt then 
+  if      map.time_of_day >= 1200 then map.time_of_day = 0
+  elseif (map.time_of_day % 2 ) <= dt then 
     bhv.assess_all(chars, map)
     -- tsk.surroundings( map, chars[1].X(), chars[1].Y() )
   end

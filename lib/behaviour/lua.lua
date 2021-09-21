@@ -26,7 +26,6 @@ end
 
 local function assess_impulses(char, map)
   local sur = tsk.surroundings(map, char.X(), char.Y())
-  print( " >", char.boredom )
   if #char.tasks > 0 then
     -- Currently busy
     char.boredom = 0 -- reduce   boredom
