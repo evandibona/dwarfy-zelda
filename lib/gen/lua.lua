@@ -54,29 +54,3 @@ end
 
 return gen
 
---[[
-
-io.write(hdr)
-
-local function ritel(s) io.write(s..",") end
-
-for y=0,bmp.height-1 do
-  io.write("\n  { ")
-  for x=0,bmp.width-1 do
-    local r,g,b,a = bmp:get_pixel(x,y)
-    if r <= 120 then 
-      ritel(t.water)
-    elseif ((r > 220) and (g > 220))  then 
-      ritel(t.sand)
-    elseif b <= 130  then 
-      ritel(t.thick)
-    else
-      ritel(t.thin)
-    end
-  end
-  if y<bmp.height-1 then 
-       io.write(" },") 
-  else io.write(" }" ) end
-end
-io.write(ftr)
---]]

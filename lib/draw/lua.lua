@@ -50,7 +50,8 @@ end
 function draw.chars(sheet, chars, x_off, y_off, ww, wh)
   for i=1,#chars do
     local char = chars[i]
-    local charq = love.graphics.newQuad( 0, 0, 16, 32, 256, 144 )
+    local charq = love.graphics.newQuad( 
+      0+64*char.color, 0, 16, 32, 256, 144 )
     if true then -- If in view-port
       love.graphics.draw( sheet, charq, 
         char.x-(x_off*draw.t_s), (char.y-1)-(y_off*draw.t_s) )

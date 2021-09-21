@@ -1,8 +1,15 @@
 ## Development Roadmap
 
 ### Version 0.01
-
 Map in place. Generated from bitmap, allows quick level creation. 
+### Version 0.02
+Was able to draw objects on fixed places on the map. 
+### Version 0.03
+Very basic movement task, characters can now visually 
+twiddle their thumbs when idle.
+### Version 0.04
+Added a 'journey' task. An attempt at simple, randomized pathfinding
+for longer distances. 
 
 ### Version 0.1
 
@@ -29,19 +36,21 @@ Move many of the geometry, map, math functions to a dedicated library file.
   Surrounds, distance, direction, etc. 
 
 All the building blocks for the final game are in place. 
-  * Stories: objects that are passed around
-  * Memories, some emotional response to connections to objects, names, people.
-  * Fire
-  * Guns, basic combat
-  * Kidnapping
-  * Risk Assessment. Present/Future Pain, Present/Future Pleasure
-  * Inventory, Items
-  * Eating
+  * Go home. 
   * Fishing
+  * Eating
+  * Fire
+  * Inventory, Items
   * Sleeping
+  * Dirt roads
+  * Memories, some emotional response to connections to objects, names, people.
   * Memory-based pathfinding
   * Landmark memory
-  * Dirt roads
+  * Guns, basic combat
+  * Seeing and noticing an item. 
+  * Stories: objects that are passed around
+  * Kidnapping
+  * Risk Assessment. Present/Future Pain, Present/Future Pleasure
 
 Simple stories to tell:
   * A guy is hungry, goes to catch a fish, cooks and eats it. 
