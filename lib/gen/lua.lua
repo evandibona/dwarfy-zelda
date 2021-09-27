@@ -21,11 +21,10 @@ end
 local function getObj( bmp, x, y )
   local r,g,b = bmp:get_pixel( x, y )
   if r == 255 then                      return nil
-  elseif cmatch(r,g,b,223,229,108) then return trk.obj.shruba
-  elseif cmatch(r,g,b,194,198,131) then return trk.obj.shrubb
-  elseif cmatch(r,g,b,167,167,167) then return trk.obj.roca 
-  elseif cmatch(r,g,b,154,154,154) then return trk.obj.rocb 
-  elseif cmatch(r,g,b,125,125,125) then return trk.obj.rocc 
+  elseif cmatch(r,g,b,249,247,221) then return trk.item.sushi
+  elseif cmatch(r,g,b,106,191, 30) then return trk.item.watermelon
+  elseif cmatch(r,g,b,243, 58, 58) then return trk.item.matches
+  elseif cmatch(r,g,b,142,152,154) then return trk.item.knife
   else                                  return nil
   end
 end
@@ -45,6 +44,7 @@ function gen.load_bitmap_layers( fns )
           table.insert( map[y], { getTile(lyr, x-1, y-1) } )
         else
           table.insert( map[y][x], getObj(lyr, x-1, y-1) )
+          if map[y][x][2] then print( "added: ", map[y][x][2], x..", "..y ) end
         end
       end
     end

@@ -9,7 +9,7 @@ local function nxy( n )
 
 local function getTile(t_x, t_y)
   return love.graphics.newQuad( 
-    t_x*draw.t_s, t_y*draw.t_s, draw.t_s, draw.t_s, draw.w, draw.h ) end
+    t_x*16, t_y*16, 16, 16, 384, 384 ) end
 
 local function draw_task_visuals(sheet, x_off, y_off, tasks)
   local function q( x, y )
@@ -37,10 +37,10 @@ function draw.map(tatl, oatl, map, x_off, y_off, ww, wh)
         and (j>=y_off-1 and j<y_off+wh) then
         local a, b = map[j][i][1], map[j][i][2]
         love.graphics.draw( tatl, getTile(nxy(a)), 
-          (i-x_off)*draw.t_s, (j-y_off)*draw.t_s )
-        if b  then
+          (i-x_off)*16, (j-y_off)*16 )
+        if b then
           love.graphics.draw( oatl, getTile(nxy(b)), 
-            (i-x_off)*draw.t_s, (j-y_off)*draw.t_s )
+            (i-x_off)*16, (j-y_off)*16 )
         end
       end
     end

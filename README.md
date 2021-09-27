@@ -39,33 +39,54 @@ All the building blocks for the final game are in place.
   * Go home. 
   * Fishing
   * Eating
-  * Fire
   * Inventory, Items
   * Sleeping
   * Dirt roads
-  * Memories, some emotional response to connections to objects, names, people.
-  * Memory-based pathfinding
   * Landmark memory
   * Guns, basic combat
   * Seeing and noticing an item. 
-  * Stories: objects that are passed around
   * Kidnapping
-  * Risk Assessment. Present/Future Pain, Present/Future Pleasure
+  * Hexaco, Exhaustion, Hunger, Vitality.
 
-Simple stories to tell:
-  * A guy is hungry, goes to catch a fish, cooks and eats it. 
+Activities and Routines for version 0.5:
+  * All possible, self-chosen activities, are in a master list. 
+    Sorted by experience required. 
+    It is only their personality which determines which characters
+    tend towards one activity or another. 
+  * Fisherman, every day he:
+    * Wakes up, goes fishing
+    * Cooks and eats his catches as hunger necessitates
+    * Stores excess in cooler
+  * Forager
+  * Recreational Gardener
+  * Recreational Explorer
+  * Cook
+
+
+Stories and Scenarios to Support:
   * A hike from one end of the island to the next. 
     * taking naps as needed
     * eating packed food 
   * A man is looking for his knife, tells others. 
     Someone sees it the next day and tells him where it is. 
+  * Memories, some emotional response to connections to objects, names, people.
+  * Memory-based pathfinding
+  * Stories: objects that are passed around
 
+### Version 0.6
+We need to implement some unifying system for
+tasking, giving orders, suggesting tasks, tasks from stories, etc.
+
+It would be great if "telling a story" that the garden should be weeded,
+would have a 90% success rate when told to a casual gardener. 
+  
 ### Version 0.751 to 1
 
 Interiors
   * Cannot be used until out-of-sight state is handled.
 Value Assessment
   * each character will value objects, in a unique way. 
+* Fire
 
 ### Version 1
 
@@ -89,3 +110,13 @@ But, you can follow that plan, as much or as little as you want to.
 Add memory and time constraints to tasks assigned. 
 So that a forgetful character might forget some smaller tasks, 
 by the time he gets to them. 
+
+  * Characters have a fixed personality
+    * It may shift minimally, and as experience acrues. 
+  * Only the Player has a personality that is 
+    determined by his decisions. 
+    So that on the completion of a full playthrough
+    he will be presented with his personality assessment.
+  * Differentiate between active and passive experience. 
+    * the ratio between them is relevant to self esteem
+  * Risk Assessment. Present/Future Pain, Present/Future Pleasure

@@ -17,10 +17,14 @@ b.boredom = 50
 c.boredom = 50
 d.boredom = 50
 
+local meethere = {170, 120}
+  meethere = {250, 130}
+-- table.insert(a.tasks, { "journey", meethere[1], meethere[2], {}})
+-- table.insert(b.tasks, { "journey", meethere[1], meethere[2], {}})
+-- table.insert(c.tasks, { "journey", meethere[1], meethere[2], {}})
+
 a.name = "Perry McCormick"
-  a.speed = 0.6
-  -- table.insert(a.tasks, 
-  --   { "journey", love.math.random(230, 460), love.math.random(30,140), {} })
+  a.speed = .72
   a.color = 3
 b.name = "Rayne Blanchard"
   b.y = b.y - love.math.random(-3,3)*16
@@ -38,6 +42,6 @@ d.name = "Johnson"
   d.color = 0
 
 
-local chars = {a, b, c, d}
+local chars = {a, b, c}--, d}
 --table.insert(chars, { a, b, c, d, e, f, g})
 return chars

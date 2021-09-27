@@ -11,7 +11,8 @@ local x_off,  y_off = 250, 144
 local ww, wh = 30, 17
 local map = gen.load_bitmap_layers({
   "./gfx/gen/island-base.bmp", 
-  "./gfx/gen/island-landscape.bmp"
+  "./gfx/gen/island-items.bmp", 
+--  "./gfx/gen/island-landscape.bmp"
 })
 
 map.time_of_day = 0

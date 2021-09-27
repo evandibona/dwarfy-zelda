@@ -76,16 +76,31 @@ local function journeyto(c, m, last, tx, ty)
   local cx, cy = c.X(), c.Y()
   local dist   = distance(cx, cy, tx, ty)
   local dx, dy = direction(cx, cy, tx, ty)
-  local seg = 5
+  local seg = 6
 
   local ldist = 99
   if #last > 0 then 
     ldist = distance(last[1], last[2], cx, cy)
   end
 
-  if ldist < 1 then
+  if ldist and last.prgs then
+    if ldist/seg < 0.6 then
+      last.prgs = last.prgs - 1
+      if last.prgs < -9 then last.prgs = -9 end
+    else
+      last.prgs = last.prgs + 1
+      if last.prgs > 5 then last.prgs = 5 end
+    end
+    --if last.prgs < 0 then
+    --  dx, dy = -dx*2, -dy*2
+    --end
+  elseif not last.prgs then
+    last.prgs = 0
+  end
+
+  if ldist < 2 then
     dx, dy = love.math.random(-1, 1), love.math.random(-1, 1)
-  elseif ldist < seg then
+  elseif last.prgs < 3 then
     local g,h = {-1,0,1,dx,dx,dx},{-1,0,1,dy,dy,dy}
     dx = g[love.math.random(1,6)]
     dy = h[love.math.random(1,6)] 
@@ -93,10 +108,13 @@ local function journeyto(c, m, last, tx, ty)
 
   if dist <= 2 then
     return true -- our journey is over.
+  elseif dist < seg then
+    table.insert(c.tasks, { 'moveto', tx, ty })
   elseif dist <= 999 then  -- Simple angle method. 
     table.insert(c.tasks, { 'moveto', cx+(dx*seg), cy+(dy*seg) })
+  else
+    print("dist is greater than 999!!!")
   end
-  print( ldist, " travelled." )
   last[1], last[2] = cx, cy
 end
 
