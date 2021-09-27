@@ -1,12 +1,10 @@
 #!/usr/bin/lua5.3
----------0 --------0 --------0 --------0 --------0 --------0 --------0 --------0
 
 local chars= require("./lib/characters.lua")
 local draw = require("./lib/draw.lua")
 local gen  = require("./lib/gen.lua")
-local bhv  = require("./lib/behaviour.lua")
 local tsk  = require("./lib/tasking.lua")
-local x_off,  y_off = 250, 144
+local x_off,  y_off = 254, 133
 --x_off,  y_off = 0, 0
 local ww, wh = 30, 17
 local map = gen.load_bitmap_layers({
@@ -72,8 +70,7 @@ function love.update( dt )
   -- TIME
   if      map.time_of_day >= 1200 then map.time_of_day = 0
   elseif (map.time_of_day % 2 ) <= dt then 
-    bhv.assess_all(chars, map)
-    -- tsk.surroundings( map, chars[1].X(), chars[1].Y() )
+    tsk.assess_all(chars, map)
   end
 
   tsk.run_all( chars, map )

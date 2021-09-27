@@ -11,25 +11,31 @@ end
 local function getTile( bmp, x, y)
   local r,g,b = bmp:get_pixel( x, y )
   if r == 1 then return trk.tls.water
-  elseif cmatch(r,g,b,100,171,227) then return trk.tls.water
-  elseif cmatch(r,g,b,210,216,174) then return trk.tls.thin
-  elseif cmatch(r,g,b,185,192,141) then return trk.tls.thick
-  else                                  return trk.tls.sand
+  elseif cmatch(r,g,b,100,171,227) then return trk.tls['water']
+  elseif cmatch(r,g,b,210,216,174) then return trk.tls['thin']
+  elseif cmatch(r,g,b,185,192,141) then return trk.tls['thick']
+  else                                  return trk.tls['sand']
   end
 end
 
 local function getObj( bmp, x, y )
   local r,g,b = bmp:get_pixel( x, y )
   if r == 255 then                      return nil
-  elseif cmatch(r,g,b,249,247,221) then return trk.item.sushi
-  elseif cmatch(r,g,b,106,191, 30) then return trk.item.watermelon
-  elseif cmatch(r,g,b,243, 58, 58) then return trk.item.matches
-  elseif cmatch(r,g,b,142,152,154) then return trk.item.knife
+  elseif cmatch(r,g,b,249,247,221) then return trk.item['sushi']
+  elseif cmatch(r,g,b,106,191, 30) then return trk.item['watermelon']
+  elseif cmatch(r,g,b,243, 58, 58) then return trk.item['matches']
+  elseif cmatch(r,g,b,87,93,95)    then return trk.item['knife']
+  elseif cmatch(r,g,b,252,248,124) then return trk.item['goldCoin']
+  elseif cmatch(r,g,b,202,206,210) then return trk.item['silverCoin']
+  elseif cmatch(r,g,b,236,216, 88) then return trk.item['goldBar']
+  elseif cmatch(r,g,b,171,175,179) then return trk.item['silverBar']
   else                                  return nil
   end
 end
 
 function gen.load_bitmap_layers( fns )
+  print(">>> ", trk.item['watermelon'])
+
   local mw, mh = 0, 0
   local map = {}
   for z=1,#fns do

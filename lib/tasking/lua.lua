@@ -1,5 +1,7 @@
 local tsk = {}
 local trk = require("./lib/track.lua")
+local bhv = require("./lib/behaviour.lua")
+local geo = require("./lib/geometry.lua")
 
 tsk.log = {}
 function tsk.print_log()
@@ -10,18 +12,17 @@ end
 
 -- move up, left, right, down, sets the target as those spaces ahead. 
 
-function tsk.surroundings(map, x, y)
-  local function s(n)
-    if n ==     trk.tls.water then return 0.1
-    elseif n == trk.tls.thick then return 0.5
-    else return 1 end
+function tsk.glance(char, map, x, y)
+  local l = { {-1,-1},{0,-1},{1,-1}, {-1,0},{1,0}, {-1,1},{0,1},{1,1} }
+  local obs = {}
+  for i=1,#l do
+    local lx, ly = l[i][1], l[i][2]
+    local obj = map[y+ly][x+lx][2]
+    if obj then 
+      --Consider an action
+      bhv.sees_obj(char, trk.lookup[obj])
+    end
   end
-
-  return { 
-    { s(map[y-1][x-1][1]), s(map[y-1][x][1]),   s(map[y-1][x+1][1]) },
-    {   s(map[y][x-1][1]),   s(map[y][x][1]),     s(map[y][x+1][1]) }, 
-    { s(map[y+1][x-1][1]), s(map[y+1][x][1]),   s(map[y+1][x+1][1]) } 
-  }
 end
 
 local function simpledir(x, y, tx, ty)
@@ -56,15 +57,14 @@ end
 
 local function moveto(c, m, tx, ty)
   local da, db = simpledir(c.X(), c.Y(), tx, ty)
-  local s = tsk.surroundings(m, c.X(), c.Y())
-  
+  local s = geo.surroundings(m, c.X(), c.Y())
   local h = s[2][2]
   c.x = c.x + da*h*c.speed   c.y = c.y + db*h*c.speed
 
-  --print("-----------------")
-  --print(s[1][1],s[1][2],s[1][3])
-  --print(s[2][1],s[2][2],s[2][3])
-  --print(s[3][1],s[3][2],s[3][3])
+  if (math.floor((c.x%24)*3)==0) or (math.floor((c.y%24)*3)==0) then 
+    --actions while moving
+    tsk.glance(c, m, c.X(), c.Y())
+  end
 
   if s[2+db][2+da] <= 0.1 then return true 
   elseif distance(c.X(), c.Y(), tx, ty) < 1 then return true 
@@ -148,5 +148,13 @@ function tsk.run_all(chars, map)
     end
   end
 end
+
+function tsk.assess_all(chars, map)
+  for i=1,#chars do
+    local char = chars[i]
+    bhv.assess_impulses(char, map)
+  end
+end
+
 
 return tsk

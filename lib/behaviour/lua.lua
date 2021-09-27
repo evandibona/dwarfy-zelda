@@ -1,5 +1,5 @@
 local bhv = {}
-local tsk = require("./lib/tasking.lua")
+local geo = require("./lib/geometry.lua")
 
 
 local function normal(n)
@@ -24,8 +24,8 @@ local function piddle(char, s)
   end
 end
 
-local function assess_impulses(char, map)
-  local sur = tsk.surroundings(map, char.X(), char.Y())
+function bhv.assess_impulses(char, map)
+  local sur = geo.surroundings(map, char.X(), char.Y())
   if #char.tasks > 0 then
     -- Currently busy
     char.boredom = 0 -- reduce   boredom
@@ -39,11 +39,8 @@ local function assess_impulses(char, map)
   end
 end
 
-function bhv.assess_all(chars, map)
-  for i=1,#chars do
-    local char = chars[i]
-    assess_impulses(char, map)
-  end
+function bhv.sees_obj(c, o)
+  print(c.name.." sees "..o.name)
 end
 
 return bhv

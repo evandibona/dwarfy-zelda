@@ -1,6 +1,6 @@
 function charTemplate()
   local char = {}
-  char.x, char.y = 273*16, 146*16
+  char.x, char.y = 277*16, 137*16
   char.X = function() return math.floor((char.x/16)+0.5) end
   char.Y = function() return math.floor((char.y/16)+1.5-.1) end
   char.tasks = {}
@@ -18,13 +18,11 @@ c.boredom = 50
 d.boredom = 50
 
 local meethere = {170, 120}
-  meethere = {250, 130}
 -- table.insert(a.tasks, { "journey", meethere[1], meethere[2], {}})
--- table.insert(b.tasks, { "journey", meethere[1], meethere[2], {}})
--- table.insert(c.tasks, { "journey", meethere[1], meethere[2], {}})
+table.insert(a.tasks, { "moveto", 249, 137 })
 
 a.name = "Perry McCormick"
-  a.speed = .72
+  a.speed = .30
   a.color = 3
 b.name = "Rayne Blanchard"
   b.y = b.y - love.math.random(-3,3)*16
@@ -42,6 +40,6 @@ d.name = "Johnson"
   d.color = 0
 
 
-local chars = {a, b, c}--, d}
+local chars = {a}--, d}
 --table.insert(chars, { a, b, c, d, e, f, g})
 return chars
