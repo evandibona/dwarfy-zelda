@@ -24,8 +24,16 @@ local trk  = {}
   itemprofile('goldBar',    84, false, 50, 50, 50, 50, 70)
   itemprofile('goldCoin',   85, false, 50, 50, 50, 50, 80)
 
-  itemprofile('watermelon', 38, 1, 44, 38, 54, 45, 40)
-  itemprofile('sushi',      39, 1, 60, 55, 40, 40, 35)
+  -- FOOD --
+  itemprofile('watermelon', 276,  2, 44, 38, 54, 45, 40)
+  itemprofile('sushi',      277,  5, 60, 55, 40, 40, 35)
+  itemprofile('cheddar',    278,  2, 30, 20, 55, 45, 60)
+  itemprofile('bolete',     279,  2, 70, 70, 45, 35, 50)
+  itemprofile('burger',     280, 17, 24, 20, 55, 45, 40)
+  itemprofile('drumstick',  281, 11, 30, 40, 55, 40, 50)
+  itemprofile('lettuce',    282,  3, 50, 40, 50, 55, 30)
+  itemprofile('apple',      283,  2, 38, 40, 60, 58, 30)
+  itemprofile('banana',     284,  3, 35, 40, 55, 60, 40)
 
 
   print("---", trk.item['watermelon'])

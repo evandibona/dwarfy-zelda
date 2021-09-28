@@ -14,5 +14,16 @@ function geo.surroundings(map, x, y)
   }
 end
 
+function geo.decr(n,min,amt)
+  amt = amt or 1 n = n-amt
+  if n<min then n=min end
+  return n
+end
+function geo.incr(n,max,amt)
+  amt = amt or 1 n = n+amt
+  if n>max then n=max end
+  return n
+end
+
 
 return geo

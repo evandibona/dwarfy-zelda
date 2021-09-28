@@ -20,15 +20,23 @@ end
 
 local function getObj( bmp, x, y )
   local r,g,b = bmp:get_pixel( x, y )
-  if r == 255 then                      return nil
-  elseif cmatch(r,g,b,249,247,221) then return trk.item['sushi']
-  elseif cmatch(r,g,b,106,191, 30) then return trk.item['watermelon']
+  if (r==255) and (b==255) then                      return nil
   elseif cmatch(r,g,b,243, 58, 58) then return trk.item['matches']
   elseif cmatch(r,g,b,87,93,95)    then return trk.item['knife']
   elseif cmatch(r,g,b,252,248,124) then return trk.item['goldCoin']
   elseif cmatch(r,g,b,202,206,210) then return trk.item['silverCoin']
   elseif cmatch(r,g,b,236,216, 88) then return trk.item['goldBar']
   elseif cmatch(r,g,b,171,175,179) then return trk.item['silverBar']
+  -- FOOD --
+  elseif cmatch(r,g,b,106,191, 30) then return trk.item['watermelon']
+  elseif cmatch(r,g,b,249,247,221) then return trk.item['sushi']
+  elseif cmatch(r,g,b,245,222, 58) then return trk.item['cheddar']
+  elseif cmatch(r,g,b,199, 98, 34) then return trk.item['bolete']
+  elseif cmatch(r,g,b,141, 94, 63) then return trk.item['burger']
+  elseif cmatch(r,g,b,156,134, 71) then return trk.item['drumstick']
+  elseif cmatch(r,g,b,106,163, 22) then return trk.item['lettuce']
+  elseif cmatch(r,g,b,233, 69, 62) then return trk.item['apple']
+  elseif cmatch(r,g,b,255,236, 93) then return trk.item['banana']
   else                                  return nil
   end
 end

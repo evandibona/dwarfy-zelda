@@ -20,7 +20,19 @@ function tsk.glance(char, map, x, y)
     local obj = map[y+ly][x+lx][2]
     if obj then 
       --Consider an action
-      bhv.sees_obj(char, trk.lookup[obj])
+      obj = trk.lookup[obj]
+      local commit = bhv.sees_obj(char, obj)
+      if commit then
+        print( "", char.name.." sees "..obj.name..", "..commit )
+        commit = math.floor(commit*1000)
+        if commit >= love.math.random(1,1000) then
+          -- Actions: Eat, Pick Up, reimplement these as a proper task. 
+          map[y+ly][x+lx][2] = nil        -- remove object from map. 
+          char.hunger = geo.decr(char.hunger,0,obj.food)
+          print(char.name.."  ATE: "..obj.name.."  hunger: "..char.hunger)
+          -- Pick up, add to inventory. 
+        end
+      end
     end
   end
 end
