@@ -5,8 +5,13 @@ function charTemplate()
   char.Y = function() return math.floor((char.y/16)+1.5-.1) end
   char.tasks = {}
   char.speed = 0.5
-  char.boredom = 0
   char.color = 0
+  char.boredom    = 0
+  char.hunger     = 0
+  char.exhaustion = 0
+
+  char.openn, char.consc, char.extro, char.agree, char.neuro = 50,50,50,50,50
+
   return char
 end
 
@@ -24,6 +29,8 @@ table.insert(a.tasks, { "moveto", 249, 137 })
 a.name = "Perry McCormick"
   a.speed = .30
   a.color = 3
+  a.openn, a.consc, a.extro, a.agree, a.neuro  = 60, 40, 70, 30, 40
+  a.hunger = 75
 b.name = "Rayne Blanchard"
   b.y = b.y - love.math.random(-3,3)*16
   b.speed = 0.7

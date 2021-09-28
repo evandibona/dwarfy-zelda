@@ -24,8 +24,8 @@ local trk  = {}
   itemprofile('goldBar',    84, false, 50, 50, 50, 50, 70)
   itemprofile('goldCoin',   85, false, 50, 50, 50, 50, 80)
 
-  itemprofile('watermelon', 38, 1, 50, 50, 50, 50, 50)
-  itemprofile('sushi',      39, 1, 50, 50, 50, 50, 50)
+  itemprofile('watermelon', 38, 1, 44, 38, 54, 45, 40)
+  itemprofile('sushi',      39, 1, 60, 55, 40, 40, 35)
 
 
   print("---", trk.item['watermelon'])

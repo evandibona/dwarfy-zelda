@@ -39,8 +39,26 @@ function bhv.assess_impulses(char, map)
   end
 end
 
+function bhv.obj_affinity(a, b)
+  local function proc(ay,be,tr)
+    return math.abs(ay[tr]-be[tr])/100
+  end
+  local averaged_dist = 
+   (proc(a,b,'openn')+proc(a,b,'consc')+proc(a,b,'extro')+
+    proc(a,b,'agree')+proc(a,b,'neuro')) / 5
+  return 1 / ( 4 * averaged_dist + 0.4 ) - 0.225
+end
+
+function bhv.need_of_obj(a, b)
+  local need = 0
+  if b.food then need = a.hunger/100 end
+  return need
+end
+
 function bhv.sees_obj(c, o)
-  print(c.name.." sees "..o.name)
+  local thoughts = ""
+  print( "desire: ", bhv.obj_affinity(c,o), "need: ",bhv.need_of_obj(c,o), "ya/na: ", 
+    bhv.obj_affinity(c,o)*bhv.need_of_obj(c,o))
 end
 
 return bhv
